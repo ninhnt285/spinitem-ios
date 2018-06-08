@@ -36,7 +36,7 @@ class SPRequest: NSObject {
         accessToken = sb.unarchive(objectForKey: "accessToken") as? String
     }
     
-    let apiUrl = "http://api.spinitem.com"
+    let apiURL = ServerSettings.apiURL
     var accessToken: String?
     
     func parseResultData(data: [String: Any], completion: @escaping ([String: Any]?, Error?)-> ()) {
@@ -70,7 +70,7 @@ class SPRequest: NSObject {
      */
     func send(path: String, type: SPRequestType, data: [String: Any]?, completion: @escaping ([String: Any]?, Error?) -> ()) {
         // Make sure got valid URL
-        guard let url = URL(string: apiUrl + path) else {
+        guard let url = URL(string: apiURL + path) else {
             completion(nil, SPError.createErrorFromString(domain: "SPRequest.send", errorText: "Invalid URL"))
             return
         }
@@ -119,7 +119,7 @@ class SPRequest: NSObject {
      */
     func upload(path: String, data: Data, completion: @escaping ([String: Any]?, Error?) -> ()) {
         // Make sure got valid URL
-        guard let url = URL(string: apiUrl + path) else {
+        guard let url = URL(string: apiURL + path) else {
             completion(nil, SPError.createErrorFromString(domain: "SPRequest.upload", errorText: "Invalid URL"))
             return
         }

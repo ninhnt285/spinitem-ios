@@ -11,10 +11,10 @@ import CoreMotion
 import AVFoundation
 
 class CaptureViewController: UIViewController {
-    var neededImageNumber = 36
+    let neededImageNumber = 36
     var processedPhotoNumber = 0
     var captureIndex = 0
-    var photos: [SPImage]!
+    var photos: [SPImage] = []
     var trackIndexs: [Int64?]!
     
     // Camera
@@ -59,8 +59,9 @@ class CaptureViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        photos = [SPImage](repeating: SPImage(), count: neededImageNumber)
+        for _ in 0..<neededImageNumber {
+            photos.append(SPImage())
+        }
         // Track index that captured or processing by uniqid
         trackIndexs = [Int64?](repeating: nil, count: neededImageNumber)
         
@@ -189,6 +190,7 @@ class CaptureViewController: UIViewController {
         UIApplication.shared.isIdleTimerDisabled = false
         
         let previewController = PreviewViewController(previewImages: self.photos)
+        previewController.canSaveImage = true
         self.present(previewController, animated: true, completion: nil)
     }
     

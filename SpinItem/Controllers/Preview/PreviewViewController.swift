@@ -14,6 +14,7 @@ class PreviewViewController: UIViewController {
     var previewImageView: PreviewView!
     var closeButton: UIButton!
     
+    var canSaveImage: Bool = false
     var isSaving: Bool = false
     var savedImage: Int = 0
     var saveButton: UIButton!
@@ -54,6 +55,9 @@ class PreviewViewController: UIViewController {
     }
     
     func configureSubviews() {
+        if !canSaveImage {
+            saveButton.isHidden = true
+        }
         saveButton.setTitle("Save", for: UIControlState.normal)
         saveButton.addTarget(self, action: #selector(handleSave(_:)), for: UIControlEvents.touchUpInside)
         
@@ -124,14 +128,17 @@ class PreviewViewController: UIViewController {
     }
     
     // Handlers
-    @objc func handleClose(_ sender: UIButton) {
+    @objc func handleClose(_ sender: UIButton?) {
         if !isSaving {
-            self.presentingViewController?.dismiss(animated: true, completion: nil)
+            if canSaveImage {
+                self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+            } else {
+                self.presentingViewController?.dismiss(animated: true, completion: nil)
+            }
         }
     }
     
     @objc func handleSave(_ sender: UIButton) {
-        /*
         if (self.images.count == 0) {
             return
         }
@@ -140,19 +147,60 @@ class PreviewViewController: UIViewController {
         savingIndicatorView.startAnimating()
         savingLabel.isHidden = false
         
-        ImageUploader.saveImages(
-            images: images,
-            itemId: nil, completionEachImageHandler: { (err, newImage) in
-                self.savedImage += 1
-                let percentage = Int(Double(self.savedImage) / Double(self.images.count) * 100)
+        // Create Item first
+        let item = SPItem()
+        item.addToServer { (err) in
+            if err != nil {
+                print("Can not create new item: \(err?.localizedDescription ?? "Unknown error")")
+                return
+            }
+            // Only upload 1 image in the same time
+            self.saveImage(index: 0, item: item)
+        }
+    }
+    
+    func saveImage(index: Int, item: SPItem) {
+        let image = self.images[index]
+        image.itemId = item.id
+        // Save each Image
+        image.addToServer(completion: { (err) in
+            if err != nil {
+                print("Can not save image: \(index)")
+            } else {
+                if (item.backgroundUrl == nil) || (item.backgroundUrl == "") {
+                    item.backgroundUrl = image.destination
+                }
+            }
+            // Update notification text UI
+            DispatchQueue.main.async {
+                let percentage = Int(Double(index + 1) / Double(self.images.count) * 100)
                 self.savingLabel.text = "Saving: \(percentage)%"
             }
-        ) { (err, imageUrls) in
-            self.isSaving = false
-            self.savingIndicatorView.stopAnimating()
-            self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
-
-        }
-        */
+            // Update images field in Item
+            if (index == self.images.count - 1) {
+                var imageIds = [String]()
+                for image in self.images {
+                    if image.id != nil {
+                        imageIds.append(image.id!)
+                    }
+                }
+                item.images = imageIds
+                item.updateToServer(completion: { (err) in
+                    if let error = err {
+                        print("Can not update imageIds to Item: \(error.localizedDescription)")
+                        return
+                    }
+                })
+                DispatchQueue.main.async {
+                    self.isSaving = false
+                    self.savingIndicatorView.stopAnimating()
+                    self.handleClose(nil)
+                }
+            }
+            
+            if index < self.images.count - 1 {
+                self.saveImage(index: index + 1, item: item)
+            }
+        })
     }
 }

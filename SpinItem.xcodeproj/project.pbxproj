@@ -26,6 +26,9 @@
 		015D4B2F202BE95F00701336 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015D4B2E202BE95F00701336 /* RoundedButton.swift */; };
 		015D4B31202C057800701336 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015D4B30202C057800701336 /* LoginViewController.swift */; };
 		015D4B33202C058500701336 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015D4B32202C058500701336 /* SignUpViewController.swift */; };
+		01694218209D5488002719CF /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01694217209D5488002719CF /* TestViewController.swift */; };
+		0169421A209D826D002719CF /* BalanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01694219209D826D002719CF /* BalanceView.swift */; };
+		017B10B9206976AD00C397F5 /* ServerSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017B10B8206976AD00C397F5 /* ServerSettings.swift */; };
 		017DEF08204B3B4500FAEB9A /* SPAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017DEF07204B3B4500FAEB9A /* SPAuth.swift */; };
 		017DEF2D204B9B8C00FAEB9A /* Strongbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017DEF2C204B9B8C00FAEB9A /* Strongbox.swift */; };
 		017DEF2F204BAEFC00FAEB9A /* SPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017DEF2E204BAEFC00FAEB9A /* SPRequest.swift */; };
@@ -35,7 +38,7 @@
 		01A6DECC202E09480070EEDA /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6DECB202E09480070EEDA /* CaptureViewController.swift */; };
 		01D13C952032580200538E08 /* SPItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D13C942032580200538E08 /* SPItem.swift */; };
 		01D13C9720329EA200538E08 /* SPImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D13C9620329EA200538E08 /* SPImage.swift */; };
-		01F303D6204E3E1E00B4DB72 /* SPUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F303D5204E3E1E00B4DB72 /* SPUploader.swift */; };
+		01F303D6204E3E1E00B4DB72 /* SPUploadFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F303D5204E3E1E00B4DB72 /* SPUploadFile.swift */; };
 		01F732A62033D06D005C38FC /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F732A52033D06D005C38FC /* PreviewView.swift */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +85,9 @@
 		015D4B2E202BE95F00701336 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		015D4B30202C057800701336 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		015D4B32202C058500701336 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		01694217209D5488002719CF /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		01694219209D826D002719CF /* BalanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceView.swift; sourceTree = "<group>"; };
+		017B10B8206976AD00C397F5 /* ServerSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerSettings.swift; sourceTree = "<group>"; };
 		017DEF07204B3B4500FAEB9A /* SPAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPAuth.swift; sourceTree = "<group>"; };
 		017DEF2C204B9B8C00FAEB9A /* Strongbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strongbox.swift; sourceTree = "<group>"; };
 		017DEF2E204BAEFC00FAEB9A /* SPRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPRequest.swift; sourceTree = "<group>"; };
@@ -91,7 +97,7 @@
 		01A6DECB202E09480070EEDA /* CaptureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
 		01D13C942032580200538E08 /* SPItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPItem.swift; sourceTree = "<group>"; };
 		01D13C9620329EA200538E08 /* SPImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPImage.swift; sourceTree = "<group>"; };
-		01F303D5204E3E1E00B4DB72 /* SPUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPUploader.swift; sourceTree = "<group>"; };
+		01F303D5204E3E1E00B4DB72 /* SPUploadFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPUploadFile.swift; sourceTree = "<group>"; };
 		01F732A52033D06D005C38FC /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -136,6 +142,7 @@
 				01553FEF202ABFB900B17EEC /* CaptureProcessingView.swift */,
 				015D4B2E202BE95F00701336 /* RoundedButton.swift */,
 				01F732A52033D06D005C38FC /* PreviewView.swift */,
+				01694219209D826D002719CF /* BalanceView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -224,6 +231,7 @@
 		015D4B23202B42AB00701336 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				01694216209D546B002719CF /* Test */,
 				017DEF2A204B469300FAEB9A /* Auth */,
 				019EB077202EC2A30062554C /* Preview */,
 				013A146E202CA84000E008E9 /* Home */,
@@ -250,8 +258,17 @@
 			isa = PBXGroup;
 			children = (
 				015D4B2C202BD75100701336 /* ColorSettings.swift */,
+				017B10B8206976AD00C397F5 /* ServerSettings.swift */,
 			);
 			path = Config;
+			sourceTree = "<group>";
+		};
+		01694216209D546B002719CF /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				01694217209D5488002719CF /* TestViewController.swift */,
+			);
+			path = Test;
 			sourceTree = "<group>";
 		};
 		017DEF2A204B469300FAEB9A /* Auth */ = {
@@ -285,7 +302,7 @@
 				01D13C942032580200538E08 /* SPItem.swift */,
 				01D13C9620329EA200538E08 /* SPImage.swift */,
 				017DEF30204BB11E00FAEB9A /* SPUser.swift */,
-				01F303D5204E3E1E00B4DB72 /* SPUploader.swift */,
+				01F303D5204E3E1E00B4DB72 /* SPUploadFile.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -361,7 +378,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "TheBigDev Co., Ltd.";
 				TargetAttributes = {
 					011DE4DD20259E3100115D39 = {
@@ -445,17 +462,20 @@
 				017DEF33204BCD2500FAEB9A /* SPError.swift in Sources */,
 				01D13C952032580200538E08 /* SPItem.swift in Sources */,
 				017DEF2F204BAEFC00FAEB9A /* SPRequest.swift in Sources */,
+				0169421A209D826D002719CF /* BalanceView.swift in Sources */,
 				017DEF08204B3B4500FAEB9A /* SPAuth.swift in Sources */,
 				017DEF31204BB11E00FAEB9A /* SPUser.swift in Sources */,
 				015D4B27202BD57600701336 /* MainVisitorViewController.swift in Sources */,
+				01694218209D5488002719CF /* TestViewController.swift in Sources */,
 				015D4B2D202BD75100701336 /* ColorSettings.swift in Sources */,
 				017DEF2D204B9B8C00FAEB9A /* Strongbox.swift in Sources */,
 				01D13C9720329EA200538E08 /* SPImage.swift in Sources */,
 				015D4B31202C057800701336 /* LoginViewController.swift in Sources */,
 				015D4B25202B42C900701336 /* InitialViewController.swift in Sources */,
+				017B10B9206976AD00C397F5 /* ServerSettings.swift in Sources */,
 				013A1474202CA98A00E008E9 /* ProfileViewController.swift in Sources */,
 				013A146B202C9C8D00E008E9 /* HomeViewController.swift in Sources */,
-				01F303D6204E3E1E00B4DB72 /* SPUploader.swift in Sources */,
+				01F303D6204E3E1E00B4DB72 /* SPUploadFile.swift in Sources */,
 				013A146D202CA6C600E008E9 /* MainMemberViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -525,6 +545,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -532,6 +553,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -582,6 +604,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -589,6 +612,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

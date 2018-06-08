@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class SPImage: NSObject {
     var id: String?
@@ -14,6 +15,10 @@ class SPImage: NSObject {
     var index: Int?
     var captureIndex: Int?
     var isActive: Bool?
+    var pitch: Float?
+    var roll: Float?
+    var yaw: Float?
+    // File
     var title: String?
     var destination: String?
     var size: Int64?
@@ -43,6 +48,15 @@ class SPImage: NSObject {
         if let isActive = jsonData["is_active"] as? Bool {
             self.isActive = isActive
         }
+        if let pitch = jsonData["pitch"] as? Float {
+            self.pitch = pitch
+        }
+        if let roll = jsonData["roll"] as? Float {
+            self.roll = roll
+        }
+        if let yaw = jsonData["yaw"] as? Float {
+            self.yaw = yaw
+        }
         if let title = jsonData["title"] as? String {
             self.title = title
         }
@@ -70,6 +84,15 @@ class SPImage: NSObject {
         }
         if isActive != nil {
             result["is_active"] = isActive
+        }
+        if pitch != nil {
+            result["pitch"] = pitch
+        }
+        if roll != nil {
+            result["roll"] = roll
+        }
+        if yaw != nil {
+            result["yaw"] = yaw
         }
         if title != nil {
             result["title"] = title
@@ -135,8 +158,20 @@ class SPImage: NSObject {
             completion(nil)
             return
         }
+        // Find max screen size
+        let maxScreenSize = max(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height)
+        var maxImageSize = 1000
+        switch maxScreenSize {
+        case let x where x < 500:
+            maxImageSize = 500
+        case let x where x < 700:
+            maxImageSize = 750
+        default:
+            maxImageSize = 1000
+        }
+        
         if let destination = self.destination {
-            SPRequest.request().downloadFile(path: destination, completion: { (data, err) in
+            SPRequest.request().downloadFile(path: "http:" + destination.replacingOccurrences(of: "%s", with: "_\(maxImageSize)x\(maxImageSize)"), completion: { (data, err) in
                 if let error = err {
                     completion(error)
                     return
@@ -151,7 +186,7 @@ class SPImage: NSObject {
     
     override var description: String {
         get {
-            return "ImageId: \(self.id ?? "Unknown Id")"
+            return "SPImage: \(self.convertToDictionary())"
         }
     }
 }

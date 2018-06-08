@@ -35,6 +35,7 @@ class CaptureProcessingView: UIView {
     
     init(frame: CGRect, tickTotal: Int = 36) {
         super.init(frame: frame)
+        self.tickTotal = tickTotal
         customInit()
     }
     

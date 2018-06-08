@@ -46,7 +46,7 @@ class SPUser: NSObject {
     
     override var description: String {
         get {
-            return "UserId: \(self.id ?? "Unknown Id")"
+            return "SPUser: \(self.convertToDictionary())"
         }
     }
 }

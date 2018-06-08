@@ -81,7 +81,8 @@ extension UIImageView {
             self.image = cachedImage
             return
         }
-        URLSession.shared.dataTask(with: URL(string: url!)!) { (data, response, error) in
+        let imageUrl = "http:" + url!
+        URLSession.shared.dataTask(with: URL(string: imageUrl)!) { (data, response, error) in
             if (error != nil) {
                 print(error!)
                 return
@@ -93,5 +94,13 @@ extension UIImageView {
                 }
             }
         }.resume()
+    }
+}
+
+extension Data {
+    func copyBytes<T>(as _: T.Type) -> [T] {
+        return withUnsafeBytes { (bytes: UnsafePointer<T>) in
+            Array(UnsafeBufferPointer(start: bytes, count: count / MemoryLayout<T>.stride))
+        }
     }
 }

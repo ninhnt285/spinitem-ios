@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import CoreMotion
 
 class WelcomeCaptureViewController: UIViewController {
+    let motion = CMMotionManager()
+    
     var captureInsideButton: UIButton = {
         let btn = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         btn.backgroundColor = UIColor.gray
@@ -60,6 +63,8 @@ class WelcomeCaptureViewController: UIViewController {
     }
     
     @objc func handleStartCapture() {
-        self.present(CaptureViewController(), animated: true, completion: nil)
+        if motion.isDeviceMotionAvailable {
+            self.present(CaptureViewController(), animated: true, completion: nil)
+        }
     }
 }

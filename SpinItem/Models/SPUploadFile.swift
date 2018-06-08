@@ -66,4 +66,10 @@ class SPUploadFile: NSObject {
             completion(SPError.createErrorFromString(domain: "SPUploadFile.uploadToServer", errorText: "Data not set"))
         }
     }
+    
+    override var description: String {
+        get {
+            return "SPUploadFile: \(self.convertToDictionary())"
+        }
+    }
 }

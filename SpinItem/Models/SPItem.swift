@@ -149,10 +149,9 @@ class SPItem: NSObject {
         }
     }
     
-    // Printable
     override var description: String {
         get {
-            return "ItemId: \(self.id ?? "Unknown Id")"
+            return "SPItem: \(self.convertToDictionary())"
         }
     }
 }

@@ -29,7 +29,6 @@ class InitialViewController: UIViewController {
     }
     
     func configureSubviews() {
-//        self.view.addVerticalGradientLayer(topColor: ColorSettings.primaryColor, bottomColor: ColorSettings.secondaryColor)
         backgroundImageView.contentMode = UIViewContentMode.scaleAspectFill
         
         activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
@@ -47,11 +46,14 @@ class InitialViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        if let _ = SPAuth.auth().currentUser {
-            self.present(MainMemberViewController(), animated: true, completion: nil)
-        } else {
-            self.present(MainVisitorViewController(), animated: false, completion: nil)
+        SPAuth.auth().tryAuth { (user, err) in
+            DispatchQueue.main.async(execute: {
+                if let _ = err {
+                    self.present(MainVisitorViewController(), animated: false, completion: nil)
+                } else {
+                    self.present(MainMemberViewController(), animated: true, completion: nil)
+                }
+            })
         }
     }
 }

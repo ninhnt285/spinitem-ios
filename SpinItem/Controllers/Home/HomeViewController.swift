@@ -29,61 +29,21 @@ class HomeViewController: UITableViewController {
     
     func loadSubviews() {
         self.refreshControl = rc
-        
-        // DELETE SOON
-        let testBtn = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.plain, target: self, action: #selector(handleSaveImage(_:)))
-        self.navigationItem.rightBarButtonItem = testBtn
+        // Add dummy item for Simulator
+//        let saveBtn = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.plain, target: self, action: #selector(handleSave(_:)))
+//        self.navigationItem.rightBarButtonItem = saveBtn
     }
-    // DELETE SOON
-    @objc func handleSaveImage(_ sender: Any) {
-        let image1 = SPImage()
-        image1.fileData = UIImageJPEGRepresentation(UIImage(named: "Square-Logo")!, 1)
-        let image2 = SPImage()
-        image2.fileData = UIImageJPEGRepresentation(UIImage(named: "Logo")!, 1)
-        let images: [SPImage] = [image1, image2]
-        
-        // Create Item first
-        let item = SPItem()
-        item.addToServer { (err) in
-            if err != nil {
-                print("Can not create new item: \(err?.localizedDescription ?? "Unknown error")")
-                return
-            }
-            // Save images
-            var imageIds: [String] = []
-            var counter = 0
-            var itemBackgroundUrl = ""
-            for index in 0..<images.count {
-                let image = images[index]
-                image.itemId = item.id
-                image.index = index
-                image.captureIndex = index
-                // Save each Image
-                image.addToServer(completion: { (err) in
-                    if err != nil {
-                        print("Can not save image: \(index)")
-                    } else {
-                        if itemBackgroundUrl == "" {
-                            itemBackgroundUrl = image.destination!
-                        }
-                        imageIds.append(image.id!)
-                    }
-                    counter += 1
-                    // Update images field in Item
-                    if counter == images.count {
-                        item.images = imageIds
-                        item.backgroundUrl = itemBackgroundUrl
-                        item.updateToServer(completion: { (err) in
-                            if let error = err {
-                                print("Can not update imageIds to Item: \(error.localizedDescription)")
-                                return
-                            }
-                        })
-                    }
-                })
-            }
-        }
-    }
+    
+//    @objc func handleSave(_ sender: Any?) {
+//        let image1 = SPImage()
+//        image1.fileData = UIImagePNGRepresentation(UIImage(named: "Logo")!)
+//        let image2 = SPImage()
+//        image2.fileData = UIImagePNGRepresentation(UIImage(named: "Square-Logo")!)
+//        
+//        let previewViewController = PreviewViewController(previewImages: [image1, image2])
+//        previewViewController.canSaveImage = true
+//        self.present(previewViewController, animated: true, completion: nil)
+//    }
     
     func configureSubviews() {
         self.view.backgroundColor = ColorSettings.backgroundColor
@@ -116,9 +76,9 @@ class HomeViewController: UITableViewController {
             } else {
                 self.items = items!
             }
-            DispatchQueue.main.async {
+            DispatchQueue.main.async(execute: {
                 completionHandler()
-            }
+            })
         }
     }
     
@@ -141,8 +101,8 @@ class HomeViewController: UITableViewController {
         
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "itemCell") as! ItemCell
         cell.textLabel?.text = item.title
-        if  item.backgroundUrl != nil {
-            cell.bgImageView?.loadImageFromCacheUrl(url: item.backgroundUrl!)
+        if let backgroundUrl = item.backgroundUrl {
+            cell.bgImageView?.loadImageFromCacheUrl(url: backgroundUrl.replacingOccurrences(of: "%s", with: "_50x50_square"))
         }
         return cell
     }
@@ -165,8 +125,10 @@ class HomeViewController: UITableViewController {
             let newImages = images?.sorted(by: { (image1, image2) -> Bool in
                 image1.index! < image2.index!
             })
-            let previewViewController = PreviewViewController(previewImages: newImages!)
-            self.present(previewViewController, animated: true, completion: nil)
+            DispatchQueue.main.async(execute: {
+                let previewViewController = PreviewViewController(previewImages: newImages!)
+                self.present(previewViewController, animated: true, completion: nil)
+            })
         }
     }
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
